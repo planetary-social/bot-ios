@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Moderator",
+        "repositoryURL": "https://github.com/planetary-social/moderator-ios",
+        "state": {
+          "branch": null,
+          "revision": "93ea0a984ec6b433a8da2c4ecc971b3df776f92a",
+          "version": "0.0.3"
+        }
+      }
+    ]
+  },
+  "version": 1
+}
