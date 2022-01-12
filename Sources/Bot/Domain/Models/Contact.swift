@@ -7,14 +7,14 @@
 
 import Foundation
 
-struct Contact: ContentCodable {
+public struct Contact: ContentCodable {
 
-    let type: ContentType
-    let contact: String
-    let following: Bool?
-    let blocking: Bool?
+    public let type: ContentType
+    public let contact: String
+    public let following: Bool?
+    public let blocking: Bool?
 
-    var identity: String {
+    public var identity: String {
         return self.contact
     }
 

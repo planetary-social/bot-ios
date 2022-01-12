@@ -7,18 +7,11 @@
 
 import Foundation
 
-struct KeyValue: Codable {
+public struct KeyValue {
 
-    enum CodingKeys: String, CodingKey {
-        case key
-        case value
-        case timestamp
-        case receivedSeq = "ReceiveLogSeq"
-        case hashedKey = "HashedKey"
-    }
+    public let key: Identifier
 
-    let key: String
-    let value: Value
+    public let value: Value
 
     // Received time
     let timestamp: Float64
@@ -67,17 +60,31 @@ struct KeyValue: Codable {
     var metadata = Metadata()
 }
 
+extension KeyValue: Codable {
+
+    enum CodingKeys: String, CodingKey {
+        case key
+        case value
+        case timestamp
+        case receivedSeq = "ReceiveLogSeq"
+        case hashedKey = "HashedKey"
+    }
+
+}
+
 extension KeyValue: Equatable {
 
-    static func == (lhs: KeyValue, rhs: KeyValue) -> Bool {
+    public static func == (lhs: KeyValue, rhs: KeyValue) -> Bool {
         return lhs.key == rhs.key
     }
 }
 
 extension KeyValue: Hashable {
-    func hash(into hasher: inout Hasher) {
+
+    public func hash(into hasher: inout Hasher) {
         hasher.combine(self.key)
     }
+    
 }
 
 extension KeyValue {

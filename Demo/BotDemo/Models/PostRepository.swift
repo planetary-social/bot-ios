@@ -36,15 +36,17 @@ class PostRepository: ObservableObject {
         }
     }
 
+    func didTapButton() {
+        update {
+            
+        }
+    }
+
     func update(completionHandler: @escaping (() -> Void)) {
-        BBot.shared.everyone { posts in
-            let aux = posts.map { post in
-                return Post(id: post.identifier,
-                            author: post.author,
-                            content: post.content)
-            }
+        BBot.shared.everyone { keyValues in
+            let posts = keyValues.map { Post(keyValue: $0) }
             DispatchQueue.main.async {
-                self.posts = aux
+                self.posts = posts
                 completionHandler()
             }
         }

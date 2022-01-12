@@ -7,18 +7,18 @@
 
 import Foundation
 
-struct Image: Codable {
+public struct Image: Codable {
 
-    let height: Int?
+    public let height: Int?
 
     /// Blob identifier
-    let link: String
+    public let link: String
     
-    let size: Int?
-    let type: String?    // mime type enum?
-    let width: Int?
+    public let size: Int?
+    public let type: String?    // mime type enum?
+    public let width: Int?
 
-    var identifier: String {
+    public var identifier: String {
         return self.link
     }
 }

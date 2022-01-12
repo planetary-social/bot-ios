@@ -7,7 +7,7 @@
 
 import Foundation
 
-class Post: ContentCodable {
+public class Post: ContentCodable {
 
     enum CodingKeys: String, CodingKey {
         case branch
@@ -19,13 +19,13 @@ class Post: ContentCodable {
         case type
     }
 
-    let branch: [String]?
-    let mentions: [Mention]?
-    let recps: [RecipientElement]?
-    let reply: [String: String]?
-    let root: String?
-    let text: String
-    let type: ContentType
+    public let branch: [Identifier]?
+    public let mentions: [Mention]?
+    public let recps: [RecipientElement]?
+    public let reply: [Identifier: Identifier]?
+    public let root: MessageIdentifier?
+    public let text: String
+    public let type: ContentType
 
     // MARK: Calculated temporal unserialized properties
 
@@ -95,7 +95,7 @@ class Post: ContentCodable {
     }
 
     /// Intended to be used to decode a model from JSON.
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         branch = Post.decodeBranch(from: values)
         mentions = try? values.decode([Mention].self, forKey: .mentions)
@@ -113,7 +113,9 @@ class Post: ContentCodable {
             return try? values.decode([String].self, forKey: .branch)
         }
     }
+
 }
+
 
 extension Post {
 

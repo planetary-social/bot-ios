@@ -20,10 +20,13 @@ struct Post: Hashable, Codable, Identifiable {
         self.content = content
     }
 
-    init(post: BBot.Post) {
-        self.id = post.identifier
-        self.author = post.author
-        self.content = post.content
+    init(keyValue: KeyValue) {
+        guard keyValue.value.content.isPost else {
+            fatalError("Only Posts are allowed here")
+        }
+        self.id = keyValue.key
+        self.author = keyValue.value.author
+        self.content = keyValue.value.content.post?.text ?? ""
     }
 
 }

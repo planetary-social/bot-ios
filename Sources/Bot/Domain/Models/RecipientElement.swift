@@ -14,11 +14,16 @@ import Foundation
 
  handling from https://stackoverflow.com/a/49023027
 */
-enum RecipientElement: Codable {
+public enum RecipientElement {
+
     case namedKey(RecipientNamedKey)
     case string(String)
 
-    init(from decoder: Decoder) throws {
+}
+
+extension RecipientElement: Codable {
+
+    public init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
         if let x = try? container.decode(String.self) {
             self = .string(x)
@@ -31,7 +36,7 @@ enum RecipientElement: Codable {
         throw DecodingError.typeMismatch(RecipientElement.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for RecipientElement"))
     }
 
-    func encode(to encoder: Encoder) throws {
+    public func encode(to encoder: Encoder) throws {
         var container = encoder.singleValueContainer()
         switch self {
         case .namedKey(let x):
@@ -40,4 +45,5 @@ enum RecipientElement: Codable {
             try container.encode(x)
         }
     }
+
 }

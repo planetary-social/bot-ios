@@ -7,12 +7,18 @@
 
 import Foundation
 
-struct RecipientNamedKey: Codable {
-    let link: String
-    let name: String
+public struct RecipientNamedKey {
+
+    public let link: Identity
+    public let name: String
+
+}
+
+extension RecipientNamedKey: Codable {
 
     enum CodingKeys: String, CodingKey {
         case name
         case link
     }
+
 }

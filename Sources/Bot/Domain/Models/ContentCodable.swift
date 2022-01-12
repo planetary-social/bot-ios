@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ContentCodable: Codable, ContentTypeable {}
+public protocol ContentCodable: Codable, ContentTypeable {}
 
 /// Shared implementation to JSON encode a model.  It's important
 /// to note that JSONEncode.encode() only accepts concrete models,
@@ -16,6 +16,10 @@ protocol ContentCodable: Codable, ContentTypeable {}
 /// encoded.  This is also why the func is called `encodeToData()`
 /// rather than providing an implementation for `Encodable.encode()`.
 extension ContentCodable {
+
+    var encodableContent: Encodable {
+        return self
+    }
 
     /// IMPORTANT!
     /// This func specifically uses an exhaustive switch.  This is to avoid

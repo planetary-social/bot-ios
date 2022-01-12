@@ -17,4 +17,7 @@ enum BotError: Error {
     case invalidIdentity
     case notLoggedIn
     case notEnoughMessagesInRepo
+    case unexpectedFault(String)
+    case databaseError(String, Error)
+    case apiError(String, Error)
 }

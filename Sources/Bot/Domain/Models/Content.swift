@@ -7,22 +7,16 @@
 
 import Foundation
 
-struct Content: Codable {
+public struct Content {
 
     /// Used to when decoding has encountered a JSON blob
     /// that does not contain a 'type' field.
     static let invalidJSON = "Invalid JSON"
 
-    /// This key can only be used for decoding.
-    /// Content should never be encoded directly.
-    enum CodingKeys: String, CodingKey {
-        case type
-    }
-
     // required type
     // if decoding fails type = .unsupported
     // and exception will have string from decode failure
-    let type: ContentType
+    public let type: ContentType
     let typeString: String
     let typeException: String?
 
@@ -33,7 +27,7 @@ struct Content: Codable {
     var pub: Pub?
     var contact: Contact?
     var dropContentRequest: DropContentRequest?
-    var post: Post?
+    public var post: Post?
     var vote: ContentVote?
 
     init(from post: Post) {
@@ -57,6 +51,31 @@ struct Content: Codable {
         self.contact = contact
     }
 
+    /// Computed property indicating if the inner model failed
+    /// decoding despite having a valid `ContentType`.  This is
+    /// useful in identifying content that we should be able to
+    /// display, but cannot for some reason.
+    var isValid: Bool {
+        return self.type != .unsupported && self.contentException == nil
+    }
+
+    /// Various validators useful to assert an expected type.
+    public var isAbout: Bool   { return self.isValid && self.type == .about && self.about != nil }
+    public var isAddress: Bool { return self.isValid && self.type == .address && self.address != nil }
+    public var isContact: Bool { return self.isValid && self.type == .contact && self.contact != nil }
+    public var isPost: Bool    { return self.isValid && self.type == .post && self.post != nil }
+    public var isVote: Bool    { return self.isValid && self.type == .vote && self.vote != nil }
+
+}
+
+extension Content: Codable {
+
+    /// This key can only be used for decoding.
+    /// Content should never be encoded directly.
+    enum CodingKeys: String, CodingKey {
+        case type
+    }
+
     /// The first responsibility of this decoder is to ensure that
     /// it never throws even when the supplied data does not contain
     /// a `type` field.  `typeString` and `typeException` will be
@@ -64,7 +83,7 @@ struct Content: Codable {
     /// will then be set to `.unsupported` and upper layers can choose
     /// how to handle this.  If `type` is successfully decoded, then
     /// decoder will be used to supply one of the supported types.
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
 
         var values: KeyedDecodingContainer<Content.CodingKeys>
         var typeString = Content.invalidJSON
@@ -122,18 +141,4 @@ struct Content: Codable {
         }
     }
 
-    /// Computed property indicating if the inner model failed
-    /// decoding despite having a valid `ContentType`.  This is
-    /// useful in identifying content that we should be able to
-    /// display, but cannot for some reason.
-    var isValid: Bool {
-        return self.type != .unsupported && self.contentException == nil
-    }
-
-    /// Various validators useful to assert an expected type.
-    var isAbout: Bool   { return self.isValid && self.type == .about && self.about != nil }
-    var isAddress: Bool { return self.isValid && self.type == .address && self.address != nil }
-    var isContact: Bool { return self.isValid && self.type == .contact && self.contact != nil }
-    var isPost: Bool    { return self.isValid && self.type == .post && self.post != nil }
-    var isVote: Bool    { return self.isValid && self.type == .vote && self.vote != nil }
 }

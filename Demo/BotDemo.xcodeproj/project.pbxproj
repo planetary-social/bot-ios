@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A038A3F2788882800F90B3D /* Bot in Frameworks */ = {isa = PBXBuildFile; productRef = 0A038A3E2788882800F90B3D /* Bot */; };
 		0A2561DB277E2C9000C15B2C /* BotDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2561DA277E2C9000C15B2C /* BotDemoApp.swift */; };
 		0A2561DF277E2C9500C15B2C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2561DE277E2C9500C15B2C /* Assets.xcassets */; };
 		0A2561E2277E2C9500C15B2C /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A2561E1277E2C9500C15B2C /* Preview Assets.xcassets */; };
-		0A2561ED277E2D0E00C15B2C /* Bot in Frameworks */ = {isa = PBXBuildFile; productRef = 0A2561EC277E2D0E00C15B2C /* Bot */; };
 		0A2561F0277E306500C15B2C /* PostRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2561EF277E306500C15B2C /* PostRow.swift */; };
 		0A2561F2277E34B500C15B2C /* PostList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2561F1277E34B500C15B2C /* PostList.swift */; };
 		0A2561F5277E365E00C15B2C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A2561F4277E365E00C15B2C /* Post.swift */; };
@@ -18,11 +18,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A038A072783766B00F90B3D /* bot-ios */ = {isa = PBXFileReference; lastKnownFileType = folder; name = "bot-ios"; path = ..; sourceTree = "<group>"; };
 		0A2561D7277E2C9000C15B2C /* BotDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BotDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A2561DA277E2C9000C15B2C /* BotDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BotDemoApp.swift; sourceTree = "<group>"; };
 		0A2561DE277E2C9500C15B2C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A2561E1277E2C9500C15B2C /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		0A2561EA277E2CFE00C15B2C /* Bot */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Bot; path = ..; sourceTree = "<group>"; };
 		0A2561EF277E306500C15B2C /* PostRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostRow.swift; sourceTree = "<group>"; };
 		0A2561F1277E34B500C15B2C /* PostList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostList.swift; sourceTree = "<group>"; };
 		0A2561F4277E365E00C15B2C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
@@ -34,17 +34,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A2561ED277E2D0E00C15B2C /* Bot in Frameworks */,
+				0A038A3F2788882800F90B3D /* Bot in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A038A062783766B00F90B3D /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				0A038A072783766B00F90B3D /* bot-ios */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		0A2561CE277E2C9000C15B2C = {
 			isa = PBXGroup;
 			children = (
-				0A2561E8277E2CA900C15B2C /* Packages */,
+				0A038A062783766B00F90B3D /* Packages */,
 				0A2561D9277E2C9000C15B2C /* BotDemo */,
 				0A2561D8277E2C9000C15B2C /* Products */,
 				0A2561EB277E2D0E00C15B2C /* Frameworks */,
@@ -77,14 +85,6 @@
 				0A2561E1277E2C9500C15B2C /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		0A2561E8277E2CA900C15B2C /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				0A2561EA277E2CFE00C15B2C /* Bot */,
-			);
-			name = Packages;
 			sourceTree = "<group>";
 		};
 		0A2561EB277E2D0E00C15B2C /* Frameworks */ = {
@@ -129,7 +129,7 @@
 			);
 			name = BotDemo;
 			packageProductDependencies = (
-				0A2561EC277E2D0E00C15B2C /* Bot */,
+				0A038A3E2788882800F90B3D /* Bot */,
 			);
 			productName = BotDemo;
 			productReference = 0A2561D7277E2C9000C15B2C /* BotDemo.app */;
@@ -394,7 +394,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0A2561EC277E2D0E00C15B2C /* Bot */ = {
+		0A038A3E2788882800F90B3D /* Bot */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = Bot;
 		};

@@ -9,6 +9,8 @@ import Foundation
 
 /// Required protocol to allow a model to be encoding for `API.publish()`.
 /// Any new models that need to be published MUST inherit this protocol.
-protocol ContentTypeable {
+public protocol ContentTypeable {
+
     var type: ContentType { get }
+    
 }

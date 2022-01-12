@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ContentType: String, CaseIterable, Codable {
+public enum ContentType: String, CaseIterable {
 
     case address
     case about
@@ -32,4 +32,8 @@ enum ContentType: String, CaseIterable, Codable {
     // this should make it easier to extend support
     // without having to reconsider these in the process.
     case unknown = "xxx-encrypted"
+}
+
+extension ContentType: Codable {
+
 }

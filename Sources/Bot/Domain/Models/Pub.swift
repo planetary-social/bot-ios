@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  Pub.swift
 //  
 //
 //  Created by Martin Dutra on 26/12/21.
@@ -7,10 +7,11 @@
 
 import Foundation
 
-struct Pub: ContentCodable {
-    let type: ContentType
+public struct Pub: ContentCodable {
 
-    struct Address: Codable {
+    public let type: ContentType
+
+    public struct Address: Codable {
         let key: String
         let host: String
         let port: UInt
@@ -19,12 +20,12 @@ struct Pub: ContentCodable {
             return "net:\(self.host):\(self.port)~shs:\(self.key.id)"
         }
 
-        func toPeer() -> Peer {
-            return Peer(tcpAddr: "\(self.host):\(self.port)", pubKey: self.key)
-        }
+//        func toPeer() -> Peer {
+//            return Peer(tcpAddr: "\(self.host):\(self.port)", pubKey: self.key)
+//        }
     }
 
-    let address: Pub.Address
+    public let address: Pub.Address
 }
 
 

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol PaginatedKeyValueDataProxy {
+public protocol PaginatedKeyValueDataProxy {
     // the total number of messages in the view
     // TODO: needs to be invalidated by insertLoop (maybe through notification center?)
     var count: Int { get }

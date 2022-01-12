@@ -7,20 +7,20 @@
 
 import Foundation
 
-struct Mention: Codable {
+public struct Mention {
 
-    let link: String
-    let name: String?
+    public let link: LinkIdentifier
+    public let name: String?
 
-    var identity: String {
+    public var identity: Identifier {
         return self.link
     }
 
     // optional
-    let size: Int? // filesize in bytes
-    let width: Int?
-    let height: Int?
-    let type: String?
+    public let size: Int? // filesize in bytes
+    public let width: Int?
+    public let height: Int?
+    public let type: String?
 
 
     // just for hashtags
@@ -51,6 +51,11 @@ struct Mention: Codable {
             self.type = nil
         }
     }
+    
+}
+
+extension Mention: Codable {
+
 }
 
 extension Mention: Markdownable {
