@@ -33,7 +33,7 @@ let package = Package(
                  from: "0.0.3"),
         .package(name: "SSB",
                  url: "https://github.com/planetary-social/ssb-ios",
-                 from: "0.0.3"),
+                 from: "0.0.4"),
         .package(name: "Blocked",
                  url: "https://github.com/planetary-social/blocked-ios",
                  from: "0.0.1"),
