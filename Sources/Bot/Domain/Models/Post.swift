@@ -35,10 +35,7 @@ public class Post: ContentCodable {
 
     /// Intended to be used when publishing a new Post from a UI.
     /// Check out NewPostViewController for an example.
-    init(attributedText: NSAttributedString,
-         root: String? = nil,
-         branches: [String]? = nil)
-    {
+    public init(attributedText: NSAttributedString, root: String? = nil, branches: [String]? = nil) {
         // required
         self.branch = branches
         self.root = root
@@ -59,7 +56,7 @@ public class Post: ContentCodable {
     }
 
     /// Intended to be used to create models in the view database or unit tests.
-    init(blobs: Blobs? = nil,
+    public init(blobs: Blobs? = nil,
          branches: [String]? = nil,
          hashtags: Hashtags? = nil,
          mentions: [Mention]? = nil,
@@ -117,7 +114,7 @@ public class Post: ContentCodable {
 }
 
 
-extension Post {
+public extension Post {
 
     var isRoot: Bool {
         return self.root == nil
@@ -142,6 +139,7 @@ extension Post {
      }
  }
 */
+// TODO: This is used by ViewDatabase only
 func getRecipientIdentities(recps: [RecipientElement]) -> [String] {
     var identities: [String] = []
     for r in recps {

@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-extension NSAttributedString {
+public extension NSAttributedString {
 
     func mentions() -> Mentions {
         let results = self.mentionsWithRanges()
@@ -52,7 +52,7 @@ extension NSAttributedString {
     }
 }
 
-extension NSMutableAttributedString {
+public extension NSMutableAttributedString {
 
     convenience init(from mention: Mention) {
         let name = mention.name ?? ""
@@ -75,7 +75,7 @@ extension NSMutableAttributedString {
     }
 }
 
-extension Mention {
+public extension Mention {
 
     var attributedString: NSMutableAttributedString {
         return NSMutableAttributedString(from: self)

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Image: Codable {
-
+    
     public let height: Int?
 
     /// Blob identifier
@@ -18,12 +18,20 @@ public struct Image: Codable {
     public let type: String?    // mime type enum?
     public let width: Int?
 
+    public init(height: Int?, link: String, size: Int?, type: String?, width: Int?) {
+        self.height = height
+        self.link = link
+        self.size = size
+        self.type = type
+        self.width = width
+    }
+
     public var identifier: String {
         return self.link
     }
 }
 
-extension Image {
+public extension Image {
 
     init(link: String) {
         self.height = nil

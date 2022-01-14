@@ -10,6 +10,7 @@ import UIKit
 import SSB
 import Logger
 import Monitor
+import Blocked
 
 class SSBService: APIService {
 
@@ -29,6 +30,8 @@ class SSBService: APIService {
 
     var currentRepoPath: String = "/tmp/FBTT/unset"
 
+    var name: String = "GoBot"
+
     var version: String {
         return ssb.version
     }
@@ -41,9 +44,28 @@ class SSBService: APIService {
         return try ssb.createSecret()
     }
 
-    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, pathPrefix: String) -> Error? {
-        // TODO: Implement
-        return nil
+    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, pathPrefix: String, servicePubs: [Identity]) -> Error? {
+        ssb.didUpdateBearerToken = { token, expires in
+            Blocked.shared.updateToken(token, expires: expires)
+        }
+        ssb.didReceiveBlobHandler = { key in
+            NotificationCenter.default.postDidLoadBlob(identifier: key.rawValue)
+        }
+        let worked = ssb.start(network: network,
+                               hmacKey: hmacKey,
+                               secret: secret,
+                               path: pathPrefix,
+                               schemaVersion: ViewDatabase.schemaVersion,
+                               servicePubs: servicePubs.map{Key($0)})
+        if worked {
+            ssb.replicate(feed: Key(secret.identity))
+            for pub in servicePubs {
+                ssb.replicate(feed: Key(pub))
+            }
+            return nil
+        } else {
+            return SSBError.unexpectedFault("failed to start")
+        }
     }
 
     func logout() -> Bool {
@@ -176,13 +198,12 @@ class SSBService: APIService {
             NotificationCenter.default.postDidFinishFSCKRepair()
         }
 
-        var progressHandler: CFSCKProgressCallback = { percDone, remaining in
-            guard let remStr = remaining else { return }
-            NotificationCenter.default.postDidUpdateFSCKRepair(percent: percDone / 100,
-                                                               remaining: String(cString: remStr))
+        ssb.didUpdateFSCKRepair = { percent, remainingTime in
+            NotificationCenter.default.postDidUpdateFSCKRepair(percent: percent,
+                                                               remaining: remainingTime)
         }
 
-        let fsckResult = ssb.fsck(mode: .sequences, progressHandler: progressHandler)
+        let fsckResult = ssb.fsck(mode: .sequences)
 
         guard !fsckResult else {
             Logger.shared.unexpected(.botError, "repair was triggered but repo fsck says it's fine")
@@ -290,6 +311,10 @@ class SSBService: APIService {
 
     func redeem(inviteToken: InviteToken) -> Bool {
         return ssb.acceptInvite(token: inviteToken.rawValue)
+    }
+
+    func repair() -> Bool {
+        return ssb.dropIndexData()
     }
 
 }

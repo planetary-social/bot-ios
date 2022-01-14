@@ -47,6 +47,18 @@ class BotServiceAdapter: BotService {
         }
     }
 
+    var name: String {
+        return api.name
+    }
+
+    var version: String {
+        return api.version
+    }
+
+    var isRunning: Bool {
+        return api.isRunning
+    }
+
     var identity: Identity?
 
     // TODO: See if it is still needed
@@ -111,7 +123,7 @@ class BotServiceAdapter: BotService {
         }
     }
 
-    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, completion: @escaping ((Error?) -> Void)) {
+    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, servicePubs: [Identity], completion: @escaping ((Error?) -> Void)) {
         guard identity == nil else {
             if secret.identity == identity {
                 DispatchQueue.background.async {
@@ -161,7 +173,8 @@ class BotServiceAdapter: BotService {
             let loginErr = api.login(network: network,
                                      hmacKey: hmacKey,
                                      secret: secret,
-                                     pathPrefix: repoPrefix)
+                                     pathPrefix: repoPrefix,
+                                     servicePubs: servicePubs)
 
             defer {
                 DispatchQueue.background.async {
@@ -1195,7 +1208,9 @@ class BotServiceAdapter: BotService {
         }
     }
 
-
+    func repair() -> Bool {
+        return api.repair()
+    }
 
     
 }

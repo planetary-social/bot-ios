@@ -12,6 +12,12 @@ import SSB
 protocol BotService {
 
     var logFileUrls: [URL] { get }
+
+    var name: String { get }
+
+    var version: String { get }
+
+    var isRunning: Bool { get }
     
     // MARK: AppLifecycle
 
@@ -28,7 +34,7 @@ protocol BotService {
     func createSecret(completion: @escaping ((Secret?, Error?) -> Void))
 
     // TODO: Change DataKey and Secret to something else
-    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, completion: @escaping ((Error?) -> Void))
+    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, servicePubs: [Identity], completion: @escaping ((Error?) -> Void))
 
     func logout(completion: @escaping ((Error?) -> Void))
 
@@ -177,4 +183,6 @@ protocol BotService {
 
     func preloadFeed(at url: URL, completion: @escaping ((Error?) -> Void))
 
+    func repair() -> Bool
+    
 }

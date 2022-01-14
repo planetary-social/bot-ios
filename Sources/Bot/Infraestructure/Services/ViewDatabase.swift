@@ -1906,14 +1906,14 @@ class ViewDatabase {
             do {
                 chanID = try self.msgID(of: a.about, make: false)
             } catch ViewDatabaseError.unknownMessage {
-                // Log.info("viewdb/debug: type:about with about:\(a.about) for a msg we don't have (probably git-repo or gathering)")
+                // Logger.shared.info("viewdb/debug: type:about with about:\(a.about) for a msg we don't have (probably git-repo or gathering)")
                 return
             }
 
             let chanFilter = self.channels.filter(colMessageRef == chanID)
 
             guard let chanName = a.name else {
-                // Log.info("viewdb/debug: about msgkey without a name: \(msg.key) (probably gathering)")
+                // Logger.shared.info("viewdb/debug: about msgkey without a name: \(msg.key) (probably gathering)")
                 return
             }
 
@@ -2458,10 +2458,10 @@ class ViewDatabase {
         let done = CFAbsoluteTimeGetCurrent()
         print("inserted \(msgs.count) in \(done)s")
 
-        if unsupported.count > 0 { // TODO: Log.debug?
+        if unsupported.count > 0 { // TODO: Logger.shared.debug?
             for (tipe, cnt) in unsupported {
                 if unsupported.keys.count < 10 {
-                    Log.info("\(tipe): \(cnt)")
+                    Logger.shared.info("\(tipe): \(cnt)")
                 }
             }
             print("unsupported types encountered: \(total) (\(total*100/msgs.count)%)")

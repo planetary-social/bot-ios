@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum Sigil: String, Codable {
+public enum Sigil: String, Codable {
     case blob = "&"
     case feed = "@"     // identity is also @
     case message = "%"  // link is also %

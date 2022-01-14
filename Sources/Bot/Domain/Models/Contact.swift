@@ -18,14 +18,14 @@ public struct Contact: ContentCodable {
         return self.contact
     }
 
-    init(contact: String, following: Bool) {
+    public init(contact: String, following: Bool) {
         self.type = .contact
         self.contact = contact
         self.following = following
         self.blocking = false
     }
 
-    init(contact: String, blocking: Bool) {
+    public init(contact: String, blocking: Bool) {
         self.type = .contact
         self.contact = contact
         self.following = false
@@ -33,7 +33,7 @@ public struct Contact: ContentCodable {
     }
 }
 
-extension Contact {
+public extension Contact {
 
     var isFollowing: Bool {
         return self.following ?? false

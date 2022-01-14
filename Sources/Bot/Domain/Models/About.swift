@@ -22,11 +22,11 @@ public struct About {
     public let type: ContentType
     public let publicWebHosting: Bool?
 
-    init() {
+    public init() {
         self.init(about: String.null)
     }
 
-    init(about: String) {
+    public init(about: String) {
         self.type = .about
         self.about = about
         self.description = nil
@@ -36,7 +36,7 @@ public struct About {
         self.publicWebHosting = nil
     }
 
-    init(about: String, name: String) {
+    public init(about: String, name: String) {
         self.type = .about
         self.about = about
         self.description = nil
@@ -46,7 +46,7 @@ public struct About {
         self.publicWebHosting = nil
     }
 
-    init(about: String, descr: String) {
+    public init(about: String, descr: String) {
         self.type = .about
         self.about = about
         self.description = descr
@@ -56,7 +56,7 @@ public struct About {
         self.publicWebHosting = nil
     }
 
-    init(about: String, publicWebHosting: Bool) {
+    public init(about: String, publicWebHosting: Bool) {
         self.type = .about
         self.about = about
         self.description = nil
@@ -66,7 +66,7 @@ public struct About {
         self.publicWebHosting = publicWebHosting
     }
 
-    init(about: String, image: String) {
+    public init(about: String, image: String) {
         self.type = .about
         self.about = about
         self.description = nil
@@ -76,7 +76,7 @@ public struct About {
         self.publicWebHosting = nil
     }
 
-    init(about: String, name: String?, description: String?, imageLink: String?, publicWebHosting: Bool? = nil) {
+    public init(about: String, name: String?, description: String?, imageLink: String?, publicWebHosting: Bool? = nil) {
         self.type = .about
         self.about = about
         self.description = description
@@ -86,7 +86,7 @@ public struct About {
         self.publicWebHosting = publicWebHosting
     }
 
-    init(identity: String, name: String?, description: String?, image: Image?, publicWebHosting: Bool?) {
+    public init(identity: String, name: String?, description: String?, image: Image?, publicWebHosting: Bool?) {
         self.type = .about
         self.about = identity
         self.description = description
@@ -96,7 +96,7 @@ public struct About {
         self.publicWebHosting = publicWebHosting
     }
 
-    func mutatedCopy(identity: String? = nil,
+    public func mutatedCopy(identity: String? = nil,
                      name: String? = nil,
                      description: String? = nil,
                      image: Image? = nil,
@@ -145,25 +145,25 @@ extension About: ContentCodable {
 
 extension About {
 
-    var identity: String {
+    public var identity: String {
         return self.about
     }
 
-    var nameOrIdentity: String {
+    public var nameOrIdentity: String {
         return self.name?.trimmedForSingleLine ?? self.identity
     }
 
     // TODO this is not performant, need to cache md results
-    var attributedDescription: NSMutableAttributedString {
+    public var attributedDescription: NSMutableAttributedString {
         return NSMutableAttributedString(attributedString: NSAttributedString())
     }
 
-    var mention: Mention {
+    public var mention: Mention {
         let mention = Mention(link: self.identity, name: self.nameOrIdentity)
         return mention
     }
 
-    func contains(_ string: String) -> Bool {
+    public func contains(_ string: String) -> Bool {
         if let name = self.name, name.localizedCaseInsensitiveContains(string) { return true }
         if let name = self.name?.withoutSpaces, name.localizedCaseInsensitiveContains(string) { return true }
         if let code = self.shortcode, code.localizedCaseInsensitiveContains(string) { return true }

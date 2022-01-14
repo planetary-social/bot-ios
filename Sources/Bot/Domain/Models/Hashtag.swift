@@ -23,29 +23,29 @@ public struct Hashtag: Codable {
         return "#\(self.name)"
     }
 
-    static func named(_ name: String) -> Hashtag {
+    public static func named(_ name: String) -> Hashtag {
         return Hashtag(name: name.withoutHashPrefix)
     }
 
-    init(name: String) {
+    public init(name: String) {
         self.name = name
         self.count = 0
         self.timestamp = 0
     }
 
-    init(name: String, count: Int64) {
+    public init(name: String, count: Int64) {
         self.name = name
         self.count = count
         self.timestamp = 0
     }
 
-    init(name: String, count: Int64, timestamp: Float64) {
+    public init(name: String, count: Int64, timestamp: Float64) {
         self.name = name
         self.count = count
         self.timestamp = timestamp
     }
 
-    init(name: String, timestamp: Float64) {
+    public init(name: String, timestamp: Float64) {
         self.name = name
         self.count = 0
         self.timestamp = timestamp
@@ -62,7 +62,7 @@ public struct Hashtag: Codable {
         try container.encode(self.name)
     }
 
-    func timeAgo() -> String {
+    public func timeAgo() -> String {
         var relativeDate = ""
         if #available(iOS 13.0, *) {
             let formatter = RelativeDateTimeFormatter()
@@ -91,16 +91,16 @@ extension Hashtag: Equatable {
 
 }
 
-typealias Hashtags = [Hashtag]
+public typealias Hashtags = [Hashtag]
 
-extension Hashtags {
+public extension Hashtags {
 
     func names() -> [String] {
         return self.map { $0.name }
     }
 }
 
-extension Mentions {
+public extension Mentions {
     func asHashtags() -> [Hashtag] {
         return self.filter {
             return $0.link.hasPrefix("#")

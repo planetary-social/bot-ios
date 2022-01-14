@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ContentVote: ContentCodable {
+public struct ContentVote: ContentCodable {
 
     enum CodingKeys: String, CodingKey {
         case branch
@@ -17,18 +17,18 @@ struct ContentVote: ContentCodable {
         case type
     }
 
-    let type: ContentType
-    let vote: Vote
+    public let type: ContentType
+    public let vote: Vote
 
     // TODO: share recps in content?
-    let recps: [RecipientElement]?
+    public let recps: [RecipientElement]?
 
     // TODO: share tangeling with Post
-    let branch: [String]?
-    let root: String?
+    public let branch: [String]?
+    public let root: String?
 
     // parse new msgs
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         type = try values.decode(ContentType.self, forKey: .type)
         vote = try values.decode(Vote.self, forKey: .vote)
@@ -48,7 +48,7 @@ struct ContentVote: ContentCodable {
     }
 
     // create/publish
-    init(link: String, value: Int) {
+    public init(link: String, value: Int) {
         self.type = .vote
 
         let exp: String
@@ -66,7 +66,7 @@ struct ContentVote: ContentCodable {
         self.recps = nil
     }
 
-    init(link: String, value: Int, root: String, branches: [String]) {
+    public init(link: String, value: Int, root: String, branches: [String]) {
         self.type = .vote
 
         let exp: String
@@ -85,7 +85,7 @@ struct ContentVote: ContentCodable {
     }
 
 
-    init(value: Int, root: String) {
+    public init(value: Int, root: String) {
         self.type = .vote
 
         let exp: String

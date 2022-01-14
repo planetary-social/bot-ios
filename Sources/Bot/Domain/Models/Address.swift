@@ -7,8 +7,8 @@
 
 import Foundation
 
-struct Address: Codable {
-    let type: ContentType
-    let address: String
-    let availability: Double
+public struct Address: Codable {
+    public let type: ContentType
+    public let address: String
+    public let availability: Double
 }

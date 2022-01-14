@@ -8,7 +8,7 @@
 import Foundation
 import CryptoKit
 
-extension String {
+public extension String {
 
     static let null = "null"
     static let notLoggedIn = "not-logged-in"

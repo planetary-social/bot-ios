@@ -14,14 +14,14 @@ public struct KeyValue {
     public let value: Value
 
     // Received time
-    let timestamp: Float64
+    public let timestamp: Float64
 
     // optional, only needed for copy from gobot to viewdb
     // TODO: find a way to stuff this in metadata? i think this requries a custom decoder
-    let receivedSeq: Int64?
-    let hashedKey: String?
+    public let receivedSeq: Int64?
+    public let hashedKey: String?
 
-    init(key: String, value: Value, timestamp: Float64) {
+    public init(key: String, value: Value, timestamp: Float64) {
         self.key = key
         self.value = value
         self.timestamp = timestamp
@@ -29,7 +29,7 @@ public struct KeyValue {
         self.hashedKey = nil
     }
 
-    init(key: String, value: Value, timestamp: Float64, receivedSeq: Int64, hashedKey: String) {
+    public init(key: String, value: Value, timestamp: Float64, receivedSeq: Int64, hashedKey: String) {
         self.key = key
         self.value = value
         self.timestamp = timestamp
@@ -39,25 +39,25 @@ public struct KeyValue {
 
     // MARK: Metadata
 
-    struct Metadata {
+    public struct Metadata {
 
-        struct Author {
-            var about: About?
+        public struct Author {
+            public var about: About?
         }
 
-        var author = Author()
+        public var author = Author()
 
-        struct Replies {
-            var count: Int = 0
-            var abouts: [About] = []
+        public struct Replies {
+            public var count: Int = 0
+            public var abouts: [About] = []
         }
 
-        var replies = Replies()
+        public var replies = Replies()
 
-        var isPrivate: Bool = false
+        public var isPrivate: Bool = false
     }
 
-    var metadata = Metadata()
+    public var metadata = Metadata()
 }
 
 extension KeyValue: Codable {
@@ -87,7 +87,7 @@ extension KeyValue: Hashable {
     
 }
 
-extension KeyValue {
+public extension KeyValue {
 
     // Convenience var to return the embedded content's type
     var contentType: ContentType {

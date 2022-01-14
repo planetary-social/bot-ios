@@ -11,40 +11,40 @@ public struct Content {
 
     /// Used to when decoding has encountered a JSON blob
     /// that does not contain a 'type' field.
-    static let invalidJSON = "Invalid JSON"
+    public static let invalidJSON = "Invalid JSON"
 
     // required type
     // if decoding fails type = .unsupported
     // and exception will have string from decode failure
     public let type: ContentType
-    let typeString: String
-    let typeException: String?
+    public let typeString: String
+    public let typeException: String?
 
     // supported content
-    var contentException: String?
-    var about: About?
-    var address: Address?
-    var pub: Pub?
-    var contact: Contact?
-    var dropContentRequest: DropContentRequest?
+    public var contentException: String?
+    public var about: About?
+    public var address: Address?
+    public var pub: Pub?
+    public var contact: Contact?
+    public var dropContentRequest: DropContentRequest?
     public var post: Post?
-    var vote: ContentVote?
+    public var vote: ContentVote?
 
-    init(from post: Post) {
+    public init(from post: Post) {
         self.type = .post
         self.typeString = "post"
         self.typeException = nil
         self.post = post
     }
 
-    init(from vote: ContentVote) {
+    public init(from vote: ContentVote) {
         self.type = .vote
         self.typeString = "vote"
         self.typeException = nil
         self.vote = vote
     }
 
-    init(from contact: Contact) {
+    public init(from contact: Contact) {
         self.type = .contact
         self.typeString = "contact"
         self.typeException = nil
@@ -55,7 +55,7 @@ public struct Content {
     /// decoding despite having a valid `ContentType`.  This is
     /// useful in identifying content that we should be able to
     /// display, but cannot for some reason.
-    var isValid: Bool {
+    public var isValid: Bool {
         return self.type != .unsupported && self.contentException == nil
     }
 

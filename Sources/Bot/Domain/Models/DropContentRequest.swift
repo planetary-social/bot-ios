@@ -7,13 +7,13 @@
 
 import Foundation
 
-class DropContentRequest: ContentCodable {
-    let type: ContentType
+public class DropContentRequest: ContentCodable {
 
-    let sequence: UInt           // the sequence number on the authors feed
-    let hash: String             // the has of the message, as a confirmation
+    public let type: ContentType
+    public let sequence: UInt           // the sequence number on the authors feed
+    public let hash: String             // the has of the message, as a confirmation
 
-    init(sequence: UInt, hash: String) {
+    public init(sequence: UInt, hash: String) {
         self.type = .dropContentRequest
         self.sequence = sequence
         self.hash = hash
@@ -25,7 +25,7 @@ class DropContentRequest: ContentCodable {
         case hash
     }
 
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: CodingKeys.self)
         self.type = try values.decode(ContentType.self, forKey: .type)
         self.sequence = try values.decode(UInt.self, forKey: .sequence)
