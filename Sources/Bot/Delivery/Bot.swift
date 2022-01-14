@@ -19,6 +19,22 @@ public class Bot {
         self.service = service
     }
 
+    public var name: String {
+        return service.name
+    }
+
+    public var version: String {
+        return service.version
+    }
+
+    public var isRunning: Bool {
+        return service.isRunning
+    }
+
+    public var logFileUrls: [URL] {
+        return service.logFileUrls
+    }
+
     public func suspend() {
         service.suspend()
     }
@@ -38,12 +54,14 @@ public class Bot {
     }
 
     // TODO: Change DataKey and Secret to something else
-    public func login(network: DataKey, hmacKey: DataKey?, secret: Secret, completion: @escaping ((Error?) -> Void)) {
-        return service.login(network: network, hmacKey: hmacKey, secret: secret, completion: completion)
+    public func login(network: DataKey, hmacKey: DataKey?, secret: Secret, servicePubs: [Identity], completion: @escaping ((Error?) -> Void)) {
+        return service.login(network: network, hmacKey: hmacKey, secret: secret, servicePubs: servicePubs, completion: completion)
     }
 
-    public func logout(completion: @escaping ((Error?) -> Void)) {
-        return service.logout(completion: completion)
+    public func logout(completion: ((Error?) -> Void)? = nil) {
+        return service.logout { error in
+            completion?(error)
+        }
     }
 
     // MARK: Sync
@@ -276,4 +294,8 @@ public class Bot {
         return service.preloadFeed(at: url, completion: completion)
     }
 
+    @discardableResult
+    public func repair() -> Bool {
+        return service.repair()
+    }
 }

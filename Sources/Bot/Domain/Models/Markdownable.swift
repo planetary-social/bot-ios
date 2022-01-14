@@ -7,6 +7,6 @@
 
 import Foundation
 
-protocol Markdownable {
+public protocol Markdownable {
     var markdown: String { get }
 }

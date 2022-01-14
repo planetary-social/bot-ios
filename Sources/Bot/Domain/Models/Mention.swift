@@ -35,7 +35,7 @@ public struct Mention {
 //        self.type = nil
 //    }
 
-    init(link: String, name: String? = nil , metadata: Blob.Metadata? = nil) {
+    public init(link: String, name: String? = nil , metadata: Blob.Metadata? = nil) {
         self.link = link
         self.name = name
 
@@ -60,15 +60,15 @@ extension Mention: Codable {
 
 extension Mention: Markdownable {
 
-    var markdown: String {
+    public var markdown: String {
         guard let name = self.name else { return "" }
         return "[\(name)](\(self.link))"
     }
 }
 
-typealias Mentions = [Mention]
+public typealias Mentions = [Mention]
 
-extension Mentions {
+public extension Mentions {
 
     func identities() -> [String] {
         return self.map { $0.identity }
@@ -79,7 +79,7 @@ extension Mentions {
     }
 }
 
-extension Mentions {
+public extension Mentions {
     func asBlobs() -> Blobs {
         return self.filter {
             return $0.link.isBlob

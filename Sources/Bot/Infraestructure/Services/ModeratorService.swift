@@ -16,8 +16,10 @@ class ModeratorService: APIService {
 
     var currentRepoPath: String = ""
 
+    var name: String = "Moderator"
+
     var version: String {
-        return "moderator"
+        return "0.1"
     }
 
     var isRunning: Bool {
@@ -30,7 +32,7 @@ class ModeratorService: APIService {
         return nil
     }
 
-    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, pathPrefix: String) -> Error? {
+    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, pathPrefix: String, servicePubs: [Identity]) -> Error? {
         Moderator.shared.everyone { posts in
             let keyValues = posts.map { post -> KeyValue in
                 let builder = KeyValueBuilder()
@@ -150,6 +152,10 @@ class ModeratorService: APIService {
     }
 
     func redeem(inviteToken: InviteToken) -> Bool {
+        return false
+    }
+
+    func repair() -> Bool {
         return false
     }
 }

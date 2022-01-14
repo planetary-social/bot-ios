@@ -13,15 +13,25 @@ public struct Value {
 
     public let content: Content
 
-    let hash: String
+    public let hash: String
 
-    let previous: String?   // TODO? only if seq == 1 but external sbot handles this currently
+    public let previous: String?   // TODO? only if seq == 1 but external sbot handles this currently
 
-    let sequence: Int
+    public let sequence: Int
 
-    let signature: String
+    public let signature: String
 
-    let timestamp: Float64 // claimed user time
+    public let timestamp: Float64 // claimed user time
+
+    public init(author: Identity, content: Content, hash: String, previous: String?, sequence: Int, signature: String, timestamp: Float64) {
+        self.author = author
+        self.content = content
+        self.hash = hash
+        self.previous = previous
+        self.sequence = sequence
+        self.signature = signature
+        self.timestamp = timestamp
+    }
 
 }
 

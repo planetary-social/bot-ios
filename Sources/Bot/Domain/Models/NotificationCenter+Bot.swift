@@ -36,4 +36,8 @@ extension NotificationCenter {
              userInfo: ["percentage_done": percent, "status": status])
     }
 
+    func postDidLoadBlob(identifier: BlobIdentifier) {
+        post(name: Notification.Name("didLoadBlob"), object: nil, userInfo: ["blobIdentifier": identifier])
+    }
+
 }

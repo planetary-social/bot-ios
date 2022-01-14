@@ -8,15 +8,15 @@
 import Foundation
 
 public struct KnownPub {
-    let AddressID: Int64
+    public let AddressID: Int64
 
-    let ForFeed: Identifier
-    let Address: String // multiserver
+    public let ForFeed: Identifier
+    public let Address: String // multiserver
 
-    let InUse: Bool
-    let WorkedLast: String
-    let LastError: String
-    let redeemed: Date?
+    public let InUse: Bool
+    public let WorkedLast: String
+    public let LastError: String
+    public let redeemed: Date?
 
 }
 

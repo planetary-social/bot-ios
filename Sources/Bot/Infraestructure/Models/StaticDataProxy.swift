@@ -7,11 +7,12 @@
 
 import Foundation
 
-class StaticDataProxy: PaginatedKeyValueDataProxy {
-    let kvs: [KeyValue]
-    let count: Int
+public class StaticDataProxy: PaginatedKeyValueDataProxy {
 
-    init() {
+    public let kvs: [KeyValue]
+    public let count: Int
+
+    public init() {
         self.kvs = []
         self.count = 0
     }
@@ -21,11 +22,11 @@ class StaticDataProxy: PaginatedKeyValueDataProxy {
         self.count = kvs.count
     }
 
-    func keyValueBy(index: Int, late: @escaping (Int, KeyValue) -> Void) -> KeyValue? {
+    public func keyValueBy(index: Int, late: @escaping (Int, KeyValue) -> Void) -> KeyValue? {
         return self.kvs[index]
     }
 
-    func keyValueBy(index: Int) -> KeyValue? {
+    public func keyValueBy(index: Int) -> KeyValue? {
         if self.kvs.isEmpty {
             return nil
         } else {
@@ -33,7 +34,7 @@ class StaticDataProxy: PaginatedKeyValueDataProxy {
         }
     }
 
-    func prefetchUpTo(index: Int) {
+    public func prefetchUpTo(index: Int) {
         /* noop */
     }
 }

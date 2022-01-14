@@ -12,11 +12,18 @@ public struct Pub: ContentCodable {
     public let type: ContentType
 
     public struct Address: Codable {
-        let key: String
-        let host: String
-        let port: UInt
 
-        var multipeer: String {
+        public let key: String
+        public let host: String
+        public let port: UInt
+
+        public init(key: String, host: String, port: UInt) {
+            self.key = key
+            self.host = host
+            self.port = port
+        }
+
+        public var multipeer: String {
             return "net:\(self.host):\(self.port)~shs:\(self.key.id)"
         }
 
@@ -26,6 +33,12 @@ public struct Pub: ContentCodable {
     }
 
     public let address: Pub.Address
+
+    public init(type: ContentType, address: Pub.Address) {
+       self.type = type
+       self.address = address
+    }
+
 }
 
 

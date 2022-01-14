@@ -18,6 +18,10 @@ public struct Statistics {
     public var repo = RepoStatistics()
     public var peer = PeerStatistics()
     public var db = DatabaseStatistics()
+
+    public init() {
+        
+    }
 }
 
 public struct RepoStatistics {

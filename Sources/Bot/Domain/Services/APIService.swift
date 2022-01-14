@@ -11,6 +11,8 @@ import SSB
 protocol APIService {
 
     var queue: DispatchQueue { get }
+
+    var name: String { get }
     
     var currentRepoPath: String { get }
 
@@ -22,7 +24,7 @@ protocol APIService {
 
     func createSecret() throws -> Secret?
 
-    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, pathPrefix: String) -> Error?
+    func login(network: DataKey, hmacKey: DataKey?, secret: Secret, pathPrefix: String, servicePubs: [Identity]) -> Error?
 
     func logout() -> Bool
 
@@ -31,6 +33,8 @@ protocol APIService {
     func openConnectionList() -> [(String, Identity)]
 
     func disconnectAll()
+
+    func repair() -> Bool
 
     // TODO: Change Peer to something else
 
